@@ -12,4 +12,4 @@ RUN tar -xzf eof-ewk-build.tar.gz -C eof-ewk-build
 
 FROM nginx:latest
 
-COPY --from=curl-edirom /downloads/eof-ewk-build /usr/share/nginx/html
+COPY --from=curl-edirom /downloads/eof-ewk-build/* /usr/share/nginx/html
