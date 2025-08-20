@@ -14,13 +14,16 @@ eob-ewk-latest.xar"
 ########################
 FROM openjdk:25-jdk-slim-bullseye AS build-content
 
+ARG EDIROM_CONTENT_PATH
+ENV EDIROM_CONTENT_PATH=${EDIROM_CONTENT_PATH:-../Edirom/content}
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ant 
 
 RUN git clone -b develop --single-branch --recursive https://github.com/Edirom/Edirom-Edition-Packaging.git
 
 WORKDIR /Edirom-Edition-Packaging
-COPY ../content .
+COPY ${EDIROM_CONTENT_PATH} .
 
 #RUN find ./sources -type f -name "*.xml" -exec sed -i 's|https://dev.korngold-werkausgabe.de/Scaler/IIIF/||g' {} +
 
