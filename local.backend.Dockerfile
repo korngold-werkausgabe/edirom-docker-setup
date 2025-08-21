@@ -13,8 +13,8 @@ RUN curl -L -o  eob-ewk-latest.xar  "https://github.com/korngold-werkausgabe/Edi
 ########################
 FROM openjdk:25-jdk-slim-bullseye AS build-content
 
-#ARG EDIROM_CONTENT_PATH
-#ENV EDIROM_CONTENT_PATH=${EDIROM_CONTENT_PATH:-../Edirom/content}
+ARG EDIROM_CONTENT_PATH
+ENV EDIROM_CONTENT_PATH=${EDIROM_CONTENT_PATH:-Edirom/content}
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ant git
@@ -22,8 +22,7 @@ RUN apt-get update \
 RUN git clone -b develop --single-branch --recursive https://github.com/Edirom/Edirom-Edition-Packaging.git
 
 WORKDIR /Edirom-Edition-Packaging
-#COPY ${EDIROM_CONTENT_PATH} .
-COPY content .
+COPY ${EDIROM_CONTENT_PATH} .
 
 RUN ant -Duri.edition=/Edirom-Edition-Packaging xar
 

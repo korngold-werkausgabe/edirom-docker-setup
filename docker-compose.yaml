@@ -2,18 +2,19 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: local.frontend.Dockerfile
+      dockerfile: editions-docker-setup/local.frontend.Dockerfile
     container_name: eof-ewk-${EDITION_NAME}
     ports:
     - 8089:80
   backend:
     build:
       context: .
-      dockerfile: local.backend.Dockerfile
+      dockerfile: editions-docker-setup/local.backend.Dockerfile
     container_name: eob-ewk-${EDITION_NAME}
     restart: unless-stopped
     environment: 
       - EXIST_PASSWORD_FILE=/run/secrets/existdb_passwd
+      - EDIROM_CONTENT_PATH=${EDIROM_CONTENT_PATH:-../Edirom/content}
     secrets:
       - source: existdb_passwd
     ports:
@@ -21,4 +22,4 @@ services:
 
 secrets:
   existdb_passwd:
-    file: ./existdb_passwd.txt
+    file: ./editions-docker-setup/existdb_passwd.txt
