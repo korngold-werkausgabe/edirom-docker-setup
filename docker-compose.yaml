@@ -1,5 +1,6 @@
 services:
   frontend:
+    image: eo-ewk/frontend
     build:
       context: .
       dockerfile: editions-docker-setup/local.frontend.Dockerfile
@@ -7,6 +8,7 @@ services:
     ports:
     - 8089:80
   backend:
+    image: eo-ewk/backend
     build:
       context: .
       dockerfile: editions-docker-setup/local.backend.Dockerfile
