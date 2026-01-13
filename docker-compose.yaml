@@ -1,6 +1,5 @@
 services:
   frontend:
-    image: eo-ewk/frontend
     build:
       context: .
       dockerfile: edirom-docker-setup/local.frontend.Dockerfile
@@ -8,7 +7,6 @@ services:
     ports:
     - 8089:80
   backend:
-    image: eo-ewk/backend
     build:
       context: .
       dockerfile: edirom-docker-setup/local.backend.Dockerfile
