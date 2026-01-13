@@ -7,7 +7,7 @@ ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Zielordner für den Build-Kontext
 DOCKER_DIR="$ROOT_DIR/edirom-docker-setup"
-SOURCE_DIR="$ROOT_DIR/Edirom/content"
+SOURCE_DIR="$ROOT_DIR/Edirom-Config/content"
 
 cp $DOCKER_DIR/docker-compose.yaml $ROOT_DIR
 
