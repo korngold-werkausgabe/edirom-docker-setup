@@ -1,20 +1,22 @@
 services:
   frontend:
-    build:
-      context: .
-      dockerfile: edirom-docker-setup/local.frontend.Dockerfile
+    #image: korngoldwerkausgabe/edirom-online-frontend-ewk
+    image: edirom-frontend:latest
     container_name: eof-ewk-${EDITION_NAME}
+    #environment: 
+    #  - APP_PATH=/test
     ports:
     - 8089:80
   backend:
-    build:
-      context: .
-      dockerfile: edirom-docker-setup/local.backend.Dockerfile
+    image: korngoldwerkausgabe/edirom-online-backend-ewk
     container_name: eob-ewk-${EDITION_NAME}
     restart: unless-stopped
     environment: 
       - EXIST_PASSWORD_FILE=/run/secrets/existdb_passwd
-      - EDIROM_CONTENT_PATH=${EDIROM_CONTENT_PATH:-../Edirom/content}
+      - EXIST_ENV=production
+      - EXIST_DEFAULT_APP_PATH=xmldb:exist:///db/apps/Edirom-Online-Backend
+    volumes:
+      - ./build-xar:/exist/autodeploy
     secrets:
       - source: existdb_passwd
     ports:
