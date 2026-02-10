@@ -1,10 +1,12 @@
 services:
   frontend:
     #image: korngoldwerkausgabe/edirom-online-frontend-ewk
-    image: edirom-frontend:latest
+    image: korngoldwerkausgabe/edirom-online-frontend-ewk
     container_name: eof-ewk-${EDITION_NAME}
     #environment: 
-    #  - APP_PATH=/test
+      #- APP_PATH=/test
+      #- BACKEND_PATH=/TEST
+      #- BACKEND_URL=https://dev.korngold-werkausgabe.de/editions/${EDITION_NAME}/backend
     ports:
     - 8089:80
   backend:
