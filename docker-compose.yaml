@@ -15,9 +15,9 @@ services:
     environment: 
       - EXIST_PASSWORD_FILE=/run/secrets/existdb_passwd
       - EXIST_ENV=development
-      - EXIST_DEFAULT_APP_PATH=xmldb:exist:///db/apps/dashboard
+      - EXIST_DEFAULT_APP_PATH=
     volumes:
-      - ./build-xar:/exist/autodeploy
+      - ./build-xar/${EDITION_SHORT}.xar:/opt/exist/autodeploy/${EDITION_SHORT}.xar
     secrets:
       - source: existdb_passwd
     ports:
