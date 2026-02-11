@@ -1,6 +1,5 @@
 services:
   frontend:
-    #image: korngoldwerkausgabe/edirom-online-frontend-ewk
     image: korngoldwerkausgabe/edirom-online-frontend-ewk
     container_name: eof-ewk-${EDITION_NAME}
     #environment: 
@@ -15,8 +14,8 @@ services:
     restart: unless-stopped
     environment: 
       - EXIST_PASSWORD_FILE=/run/secrets/existdb_passwd
-      - EXIST_ENV=production
-      - EXIST_DEFAULT_APP_PATH=xmldb:exist:///db/apps/Edirom-Online-Backend
+      - EXIST_ENV=development
+      - EXIST_DEFAULT_APP_PATH=xmldb:exist:///db/apps/dashboard
     volumes:
       - ./build-xar:/exist/autodeploy
     secrets:
