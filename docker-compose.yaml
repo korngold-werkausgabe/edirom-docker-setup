@@ -17,7 +17,7 @@ services:
       - EXIST_ENV=development
       - EXIST_DEFAULT_APP_PATH=
     volumes:
-      - ./build-xar/${EDITION_SHORT}.xar:/opt/exist/autodeploy/${EDITION_SHORT}.xar
+      - ./build-xar/*.xar:/opt/exist/autodeploy/${EDITION_SHORT}.xar
     secrets:
       - source: existdb_passwd
     ports:
