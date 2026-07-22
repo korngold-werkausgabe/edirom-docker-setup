@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: korngoldwerkausgabe/edirom-online-frontend-ewk
+    image: ghcr.io/korngold-werkausgabe/eof-ewk
     container_name: eof-ewk-${EDITION_NAME}
     #environment: 
       #- APP_PATH=/test
@@ -9,7 +9,7 @@ services:
     ports:
     - 8089:80
   backend:
-    image: korngoldwerkausgabe/edirom-online-backend-ewk
+    image: ghcr.io/korngold-werkausgabe/eob-ewk
     container_name: eob-ewk-${EDITION_NAME}
     restart: unless-stopped
     environment: 
@@ -17,7 +17,7 @@ services:
       - EXIST_ENV=development
       - EXIST_DEFAULT_APP_PATH=
     volumes:
-      - ./build-xar/${EDITION_SHORT}.xar:/opt/exist/autodeploy/${EDITION_SHORT}.xar
+      - ./build-xar/${EDITION_NAME}.xar:/opt/exist/autodeploy/${EDITION_NAME}.xar
     secrets:
       - source: existdb_passwd
     ports:
