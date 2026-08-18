@@ -5,13 +5,9 @@ set -e
 # Absoluten Pfad zum aktuellen Verzeichnis ermitteln
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Zielordner für den Build-Kontext
-DOCKER_DIR="$ROOT_DIR/edirom-docker-setup"
-SOURCE_DIR="$ROOT_DIR/Edirom-Config/content"
-
-cp $DOCKER_DIR/docker-compose.yaml $ROOT_DIR
+cp $DOCKER_DIR/dev.docker-compose.yaml $ROOT_DIR
 
 docker compose --env-file "$ROOT_DIR/.env" up -d
 
 # Nach dem Build den kopierten Content-Ordner wieder entfernen
-rm "$ROOT_DIR/docker-compose.yaml"
+rm "$ROOT_DIR/dev.docker-compose.yaml"

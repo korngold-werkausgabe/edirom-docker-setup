@@ -1,0 +1,31 @@
+services:
+  frontend-serve:
+    image: nginx:latest
+    container_name: edirom-online-frontend-serve
+    volumes:
+      - ../.:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 8089:80
+    #environment: 
+      #- APP_PATH=/test
+      #- BACKEND_PATH=/TEST
+      #- BACKEND_URL=https://dev.korngold-werkausgabe.de/editions/${EDITION_NAME}/backend
+
+  backend:
+    build:
+      context: ../../Edirom-Online-Backend_EWK
+      dockerfile: dev.Dockerfile
+    container_name: edirom-online-backend
+    environment: 
+      - EXIST_ENV=development
+      - EXIST_DEFAULT_APP_PATH=
+      - EXIST_PASSWORD=korngold
+    volumes:
+      - ./build-xar/*.xar:/opt/exist/autodeploy/${EDITION_SHORT}.xar
+    ports:
+    - 8080:8080
+
+secrets:
+  existdb_passwd:
+    file: ./edirom-docker-setup/existdb_passwd.txt
